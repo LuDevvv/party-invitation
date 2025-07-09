@@ -1,26 +1,292 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Safari Theme Colors */
+  --jungle-50: #f0f9f0;
+  --jungle-100: #dcf2dc;
+  --jungle-200: #bce5bc;
+  --jungle-300: #8dd28d;
+  --jungle-400: #5ab85a;
+  --jungle-500: #369c36;
+  --jungle-600: #2a7d2a;
+  --jungle-700: #246324;
+  --jungle-800: #1f4f1f;
+  --jungle-900: #1a411a;
+
+  --safari-50: #fdf8f0;
+  --safari-100: #fbeede;
+  --safari-200: #f6d9b8;
+  --safari-300: #f0c086;
+  --safari-400: #e8a052;
+  --safari-500: #e2852f;
+  --safari-600: #d46d25;
+  --safari-700: #b05220;
+  --safari-800: #8c4221;
+  --safari-900: #72371d;
+
+  --sunset-50: #fff7ed;
+  --sunset-100: #ffedd5;
+  --sunset-200: #fed7aa;
+  --sunset-300: #fdba74;
+  --sunset-400: #fb923c;
+  --sunset-500: #f97316;
+  --sunset-600: #ea580c;
+  --sunset-700: #c2410c;
+  --sunset-800: #9a3412;
+  --sunset-900: #7c2d12;
+
+  /* Primary Background */
+  --background: #f0f9f0;
+  --foreground: #1a411a;
+
+  /* Card Colors */
+  --card-bg: #ffffff;
+  --card-border: #bce5bc;
+
+  /* Text Colors */
+  --text-primary: #1a411a;
+  --text-secondary: #246324;
+  --text-accent: #e2852f;
+
+  /* Button Colors */
+  --btn-primary: #369c36;
+  --btn-primary-hover: #2a7d2a;
+  --btn-secondary: #e2852f;
+  --btn-secondary-hover: #d46d25;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), "Inter", ui-sans-serif, system-ui;
+  --font-display: var(--font-poppins), "Poppins", ui-sans-serif, system-ui;
+  --font-handwritten: "Caveat", cursive;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background: linear-gradient(
+    135deg,
+    var(--jungle-50) 0%,
+    var(--safari-50) 50%,
+    var(--sunset-50) 100%
+  );
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Safari Theme Gradients */
+.bg-jungle-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--jungle-900) 0%,
+    var(--jungle-500) 50%,
+    var(--jungle-400) 100%
+  );
+}
+
+.bg-safari-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--safari-900) 0%,
+    var(--safari-500) 50%,
+    var(--safari-200) 100%
+  );
+}
+
+.bg-sunset-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--sunset-900) 0%,
+    var(--sunset-500) 50%,
+    var(--sunset-200) 100%
+  );
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--jungle-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--jungle-500);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--jungle-600);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.font-handwritten {
+  font-family: var(--font-handwritten);
+}
+
+/* Animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-2px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+/* Animation Classes */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-sway {
+  animation: sway 4s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-zoom-in {
+  animation: zoomIn 0.3s ease-out;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Safari Card Styles */
+.safari-card {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(26, 65, 26, 0.15);
+  transition: all 0.3s ease;
+}
+
+.safari-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px -10px rgba(26, 65, 26, 0.25);
+}
+
+/* Button Styles */
+.btn-safari {
+  background: var(--btn-primary);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-safari:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-2px);
+}
+
+.btn-whatsapp {
+  background: #25d366;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-whatsapp:hover {
+  background: #1da851;
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .safari-card {
+    margin: 10px;
+    border-radius: 12px;
+  }
 }
