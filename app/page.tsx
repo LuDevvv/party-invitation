@@ -1,9 +1,14 @@
-import { HeroSection } from "@/components/hero/HeroSection";
+import { HeroSection } from "@/components/sections/HeroSection";
+import SafariDivider from "@/components/sections/SafariDivider";
+import StorySection from "@/components/sections/StorySection";
+import { SafariLayout } from "@/components/layout";
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <SafariLayout>
       <HeroSection />
-    </div>
+      <SafariDivider />
+      <StorySection />
+    </SafariLayout>
   );
 }

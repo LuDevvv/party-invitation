@@ -1,4 +1,3 @@
-// src/components/hero/VideoBackground.tsx
 "use client";
 
 import React, { useRef, useEffect, useState, useCallback } from "react";
@@ -8,6 +7,20 @@ interface VideoBackgroundProps {
   poster: string;
   title?: string;
   className?: string;
+}
+
+interface NetworkConnection {
+  saveData?: boolean;
+  effectiveType?: "2g" | "3g" | "4g" | "slow-2g";
+  downlink?: number;
+  addEventListener?: (event: string, handler: () => void) => void;
+  removeEventListener?: (event: string, handler: () => void) => void;
+}
+
+interface ExtendedNavigator extends Navigator {
+  connection?: NetworkConnection;
+  mozConnection?: NetworkConnection;
+  webkitConnection?: NetworkConnection;
 }
 
 export default function VideoBackground({
@@ -23,7 +36,7 @@ export default function VideoBackground({
   // Evaluar si debe cargar video basado en conexión
   const shouldLoadVideoBasedOnConnection = useCallback((): boolean => {
     // Verificar si está en modo de ahorro de datos del navegador
-    const extNavigator = navigator as any;
+    const extNavigator = navigator as ExtendedNavigator;
     if (extNavigator.connection?.saveData) return false;
 
     // Verificar Network Information API
@@ -90,7 +103,7 @@ export default function VideoBackground({
 
   // Escuchar cambios en la conexión
   useEffect(() => {
-    const extNavigator = navigator as any;
+    const extNavigator = navigator as ExtendedNavigator;
     const connection =
       extNavigator.connection ||
       extNavigator.mozConnection ||
@@ -107,9 +120,9 @@ export default function VideoBackground({
       }
     };
 
-    connection.addEventListener("change", handleConnectionChange);
+    connection.addEventListener?.("change", handleConnectionChange);
     return () =>
-      connection.removeEventListener("change", handleConnectionChange);
+      connection.removeEventListener?.("change", handleConnectionChange);
   }, [shouldLoadVideoBasedOnConnection, shouldLoadVideo, prefersReducedMotion]);
 
   const handleCanPlay = useCallback(() => {

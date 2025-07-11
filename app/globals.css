@@ -74,12 +74,6 @@ html {
 }
 
 body {
-  background: linear-gradient(
-    135deg,
-    var(--jungle-50) 0%,
-    var(--safari-50) 50%,
-    var(--sunset-50) 100%
-  );
   color: var(--foreground);
   font-family: var(--font-sans);
   line-height: 1.6;
