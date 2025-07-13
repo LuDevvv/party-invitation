@@ -35,32 +35,48 @@
   --sunset-800: #9a3412;
   --sunset-900: #7c2d12;
 
-  /* Primary Background */
-  --background: #f0f9f0;
-  --foreground: #1a411a;
+  /* Enhanced Wood Colors */
+  --wood-50: #fefaf5;
+  --wood-100: #fdf2e9;
+  --wood-200: #fce7d3;
+  --wood-300: #f9d3a7;
+  --wood-400: #f4b76a;
+  --wood-500: #e8a052;
+  --wood-600: #d4763a;
+  --wood-700: #b05220;
+  --wood-800: #8c4221;
+  --wood-900: #72371d;
 
-  /* Card Colors */
-  --card-bg: #ffffff;
-  --card-border: #bce5bc;
+  /* Background Gradients */
+  --bg-safari: linear-gradient(
+    135deg,
+    var(--safari-50) 0%,
+    var(--sunset-50) 50%,
+    var(--jungle-50) 100%
+  );
+  --bg-wood: linear-gradient(
+    135deg,
+    var(--wood-100) 0%,
+    var(--wood-200) 50%,
+    var(--wood-300) 100%
+  );
+  --bg-modal: linear-gradient(
+    135deg,
+    var(--wood-50) 0%,
+    var(--safari-100) 100%
+  );
 
-  /* Text Colors */
-  --text-primary: #1a411a;
-  --text-secondary: #246324;
-  --text-accent: #e2852f;
+  /* Card Effects */
+  --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --card-shadow-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --modal-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 
-  /* Button Colors */
-  --btn-primary: #369c36;
-  --btn-primary-hover: #2a7d2a;
-  --btn-secondary: #e2852f;
-  --btn-secondary-hover: #d46d25;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter), "Inter", ui-sans-serif, system-ui;
-  --font-display: var(--font-poppins), "Poppins", ui-sans-serif, system-ui;
-  --font-handwritten: "Caveat", cursive;
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
 }
 
 * {
@@ -74,82 +90,21 @@ html {
 }
 
 body {
-  color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
+  background: var(--bg-safari);
+  color: var(--jungle-900);
 }
 
-/* Safari Theme Gradients */
-.bg-jungle-gradient {
-  background: linear-gradient(
-    135deg,
-    var(--jungle-900) 0%,
-    var(--jungle-500) 50%,
-    var(--jungle-400) 100%
-  );
-}
-
-.bg-safari-gradient {
-  background: linear-gradient(
-    135deg,
-    var(--safari-900) 0%,
-    var(--safari-500) 50%,
-    var(--safari-200) 100%
-  );
-}
-
-.bg-sunset-gradient {
-  background: linear-gradient(
-    135deg,
-    var(--sunset-900) 0%,
-    var(--sunset-500) 50%,
-    var(--sunset-200) 100%
-  );
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--jungle-100);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--jungle-500);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--jungle-600);
-}
-
-/* Typography */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.font-handwritten {
-  font-family: var(--font-handwritten);
-}
-
-/* Animations */
+/* Enhanced Safari Animations */
 @keyframes float {
   0%,
   100% {
-    transform: translateY(0px);
+    transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-20px) rotate(2deg);
   }
 }
 
@@ -163,10 +118,10 @@ h6 {
   }
 }
 
-@keyframes fadeIn {
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -174,10 +129,10 @@ h6 {
   }
 }
 
-@keyframes zoomIn {
+@keyframes scaleIn {
   from {
     opacity: 0;
-    transform: scale(0.8);
+    transform: scale(0.9);
   }
   to {
     opacity: 1;
@@ -185,102 +140,383 @@ h6 {
   }
 }
 
-@keyframes shake {
-  0%,
+@keyframes woodGrain {
+  0% {
+    background-position: 0% 0%;
+  }
   100% {
-    transform: translateX(0);
+    background-position: 100% 100%;
   }
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
-    transform: translateX(-2px);
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
   }
-  20%,
-  40%,
-  60%,
-  80% {
-    transform: translateX(2px);
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 
 /* Animation Classes */
 .animate-float {
-  animation: float 3s ease-in-out infinite;
+  animation: float 6s ease-in-out infinite;
 }
 
 .animate-sway {
-  animation: sway 4s ease-in-out infinite;
+  animation: sway 8s ease-in-out infinite;
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-out;
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
 }
 
-.animate-zoom-in {
-  animation: zoomIn 0.3s ease-out;
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out;
 }
 
-.animate-shake {
-  animation: shake 0.5s ease-in-out;
+.animate-modal-in {
+  animation: modalSlideIn 0.3s ease-out;
 }
 
 /* Safari Card Styles */
 .safari-card {
-  background: var(--card-bg);
-  border: 2px solid var(--card-border);
-  border-radius: 16px;
-  box-shadow: 0 10px 25px -5px rgba(26, 65, 26, 0.15);
-  transition: all 0.3s ease;
+  background: var(--bg-wood);
+  border: 4px solid var(--wood-700);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-shadow);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.safari-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 20% 30%,
+      rgba(139, 69, 19, 0.08) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(160, 82, 45, 0.08) 0%,
+      transparent 50%
+    ),
+    linear-gradient(45deg, rgba(101, 67, 33, 0.03) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(101, 67, 33, 0.03) 25%, transparent 25%);
+  background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+  pointer-events: none;
+}
+
+.safari-card::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: calc(var(--radius-xl) - 4px);
+  pointer-events: none;
 }
 
 .safari-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px -10px rgba(26, 65, 26, 0.25);
+  transform: translateY(-8px);
+  box-shadow: var(--card-shadow-hover);
 }
 
-/* Button Styles */
+/* Wood Decorative Elements */
+.wood-corners {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--wood-800);
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+.wood-corners::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background: var(--wood-600);
+  border-radius: 50%;
+}
+
+/* Modal Styles */
+.safari-modal-backdrop {
+  backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.75);
+  animation: fadeInUp 0.3s ease;
+}
+
+.safari-modal {
+  background: var(--bg-modal);
+  border: 2px solid var(--wood-700);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--modal-shadow);
+  position: relative;
+  overflow: hidden;
+  animation: modalSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.safari-modal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 25% 25%,
+      rgba(139, 69, 19, 0.06) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(160, 82, 45, 0.06) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+/* Modal Header */
+.safari-modal-header {
+  background: linear-gradient(
+    135deg,
+    var(--jungle-600) 0%,
+    var(--jungle-700) 100%
+  );
+  border-bottom: 4px solid var(--jungle-800);
+  position: relative;
+  overflow: hidden;
+}
+
+.safari-modal-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Enhanced Button Styles */
 .btn-safari {
-  background: var(--btn-primary);
+  background: linear-gradient(
+    135deg,
+    var(--jungle-500) 0%,
+    var(--jungle-600) 100%
+  );
   color: white;
-  padding: 12px 24px;
-  border-radius: 12px;
-  border: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  cursor: pointer;
+  border: 3px solid var(--jungle-700);
+  border-radius: var(--radius-lg);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(54, 156, 54, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btn-safari::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.6s ease;
 }
 
 .btn-safari:hover {
-  background: var(--btn-primary-hover);
+  background: linear-gradient(
+    135deg,
+    var(--jungle-600) 0%,
+    var(--jungle-700) 100%
+  );
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(54, 156, 54, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btn-safari:hover::before {
+  left: 100%;
+}
+
+.btn-safari:active {
   transform: translateY(-2px);
 }
 
-.btn-whatsapp {
-  background: #25d366;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 12px;
-  border: none;
-  font-weight: 600;
+/* Form Input Styles */
+.safari-input {
+  background: white;
+  border: 3px solid var(--wood-400);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  font-size: 1rem;
+  font-weight: 500;
   transition: all 0.3s ease;
-  cursor: pointer;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
-.btn-whatsapp:hover {
-  background: #1da851;
+.safari-input:focus {
+  outline: none;
+  border-color: var(--jungle-500);
+  box-shadow: 0 0 0 4px rgba(54, 156, 54, 0.15),
+    inset 0 2px 4px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
+}
+
+.safari-input.error {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15),
+    inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Counter Styles */
+.safari-counter {
+  background: white;
+  border: 4px solid var(--wood-400);
+  border-radius: var(--radius-lg);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.safari-counter-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid;
+  font-weight: bold;
+  font-size: 1.75rem;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.safari-counter-btn.increment {
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-color: #047857;
+  color: white;
+}
+
+.safari-counter-btn.decrement {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  border-color: #b91c1c;
+  color: white;
+}
+
+.safari-counter-btn:hover:not(:disabled) {
+  transform: scale(1.15);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.safari-counter-btn:active:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.safari-counter-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Success State */
+.safari-success {
+  background: linear-gradient(
+    135deg,
+    var(--jungle-500) 0%,
+    var(--jungle-600) 100%
+  );
+  border: 6px solid var(--jungle-700);
+  color: white;
+  animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Loading Spinner */
+.safari-spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 3px solid white;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  body {
-    font-size: 14px;
+  .safari-card {
+    border-width: 3px;
+    border-radius: var(--radius-lg);
   }
 
-  .safari-card {
-    margin: 10px;
-    border-radius: 12px;
+  .safari-modal {
+    border-width: 4px;
+    margin: 16px;
+  }
+
+  .safari-counter-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+  }
+
+  .safari-input {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .safari-counter-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 1.25rem;
   }
 }
