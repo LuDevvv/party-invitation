@@ -17,15 +17,15 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Benjamin - Safari Adventure | Fiesta de 3 años",
+  title: "Ian - Safari Adventure | Fiesta de 1 año",
   description:
-    "¡Únete a la aventura safari de Benjamin! Celebra sus 3 años con nosotros. Sábado 28 de Outubro a las 15H.",
-  keywords: "fiesta infantil, safari, cumpleaños, benjamin, 3 años, invitación",
+    "¡Únete a la fiesta de Ian! Celebra su 1 año con nosotros. Sábado 28 de Agosto a las 2:30.",
+  keywords: "fiesta infantil, safari, cumpleaños, Ian, 1 año, invitación",
   authors: [{ name: "Safari Party Team" }],
   openGraph: {
-    title: "Benjamin - Safari Adventure | Fiesta de 3 años",
+    title: "Ian | Fiesta de 1 año",
     description:
-      "¡Únete a la aventura safari de Benjamin! Celebra sus 3 años con nosotros.",
+      "¡Únete a la aventura safari de Ian! Celebra sus 1 año con nosotros.",
     type: "website",
     locale: "es_ES",
     images: [
@@ -33,15 +33,15 @@ export const metadata: Metadata = {
         url: "/images/og-safari.jpg",
         width: 1200,
         height: 630,
-        alt: "Fiesta Safari de Benjamin",
+        alt: "Fiesta Safari de Ian",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Benjamin - Safari Adventure | Fiesta de 3 años",
+    title: "Ian - Safari Adventure | Fiesta de 1 año",
     description:
-      "¡Únete a la aventura safari de Benjamin! Celebra sus 3 años con nosotros.",
+      "¡Únete a la aventura safari de Ian! Celebra sus 1 año con nosotros.",
     images: ["/images/og-safari.jpg"],
   },
   robots: {

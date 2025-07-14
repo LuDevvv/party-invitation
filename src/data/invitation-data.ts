@@ -49,7 +49,7 @@ export const whatsappConfig = {
 👤 Nombre: ${guestName}
 👥 Cantidad de invitados: ${guestCount}
 
-🎂 Fiesta de Benjamin (3 años)
+🎂 Fiesta de Ian (1 año)
 📅 ${invitationData.event.day} ${invitationData.event.date} de ${invitationData.event.month}
 ⏰ ${invitationData.event.time}
 📍 ${invitationData.event.address}

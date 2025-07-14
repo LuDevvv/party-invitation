@@ -77,7 +77,7 @@ export const HeroSection = () => {
             <div className="relative w-40 md:w-44 lg:w-48 h-auto">
               <Image
                 src="https://res.cloudinary.com/dcuapqoii/image/upload/v1752269499/Artboard_7_copy_2_fj7zqr.png"
-                alt="Marco cartel 3 años"
+                alt="Marco cartel 1 año"
                 width={192}
                 height={120}
                 className="w-full h-auto drop-shadow-xl"
@@ -89,7 +89,7 @@ export const HeroSection = () => {
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <Image
                   src="https://res.cloudinary.com/dcuapqoii/image/upload/v1752465636/Artboard_6_copy_2_gkdmam.png"
-                  alt="Texto 3 años"
+                  alt="Texto 1 año"
                   width={144}
                   height={40}
                   className="w-24 md:w-32 lg:w-36 h-auto"
