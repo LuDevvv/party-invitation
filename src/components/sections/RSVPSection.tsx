@@ -50,7 +50,7 @@ export const RSVPSection: React.FC = () => {
                 </div>
               </div>
               <p className="text-lg md:text-xl lg:text-2xl text-gray-700 max-w-3xl mx-auto mt-6 leading-relaxed font-medium">
-                No te pierdas esta increíble aventura safari.
+                No te pierdas esta increíble celebración.
               </p>
             </div>
 
@@ -104,7 +104,7 @@ export const RSVPSection: React.FC = () => {
                         </span>
                       </span>
                       <span className="block text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-green-700 drop-shadow-lg">
-                        aventura safari?
+                        fiesta?
                       </span>
                     </h3>
 
