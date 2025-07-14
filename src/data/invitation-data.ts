@@ -2,23 +2,17 @@ import { InvitationData } from "@/types/invitation";
 
 export const invitationData: InvitationData = {
   child: {
-    name: "BENJAMIN",
-    age: "03 AÑOS",
-    photo: "/images/child/benjamin.jpg",
+    name: "Ian",
+    age: "1 AÑO",
+    photo:
+      "https://res.cloudinary.com/dcuapqoii/image/upload/v1752270346/WhatsApp_Image_2025-07-11_at_15.53.22_orzl9h.jpg",
   },
   event: {
-    date: "28",
-    day: "Sábado",
-    month: "Outubro",
-    time: "15H",
+    date: "3",
+    day: "Domingo",
+    month: "Agosto",
+    time: "2:30 PM",
     address: "Rua Camudos 402",
-  },
-  venue: {
-    photos: [
-      "/images/venue/venue-1.jpg",
-      "/images/venue/venue-2.jpg",
-      "/images/venue/venue-3.jpg",
-    ],
   },
   story: {
     title: "El regalo llamado Ian",
@@ -33,10 +27,6 @@ Semanas después, como si el cielo hablara a través de los sueños, apareció �
 Así fue como Ian llegó. En el momento justo, como respuesta divina, como luz en medio de la oscuridad. Un bebé esperado, deseado y profundamente amado desde antes de existir.
 
 "Porque los milagros no siempre llegan cuando uno quiere… pero siempre llegan cuando uno más los necesita".`,
-  },
-  media: {
-    video: "/video/intro-video.mp4",
-    audio: "/audio/jungle-sounds.mp3",
   },
 };
 

@@ -8,22 +8,21 @@ export const useWhatsApp = () => {
   ) => {
     const phoneNumber = "+5491234567890"; // Cambiar por el número real
 
-    let message = `🎉 ¡Confirmación de asistencia! 🦁
+    let message = `Confirmación de asistencia
 
-👤 Nombre: ${guestName}
-👥 Cantidad de invitados: ${guestCount}
+Nombre: ${guestName}
+Cantidad de invitados: ${guestCount}
 
-🎂 Fiesta de ${invitationData.child.name} (${invitationData.child.age})
-📅 ${invitationData.event.day} ${invitationData.event.date} de ${invitationData.event.month}
-⏰ ${invitationData.event.time}
-📍 ${invitationData.event.address}`;
+Fiesta de ${invitationData.child.name} (${invitationData.child.age} años)
+Fecha: ${invitationData.event.day} ${invitationData.event.date} de ${invitationData.event.month}
+Hora: ${invitationData.event.time}
+Dirección: ${invitationData.event.address}`;
 
-    // Agregar mensaje adicional si existe
     if (additionalMessage && additionalMessage.trim()) {
-      message += `\n\n💬 Mensaje adicional:\n${additionalMessage.trim()}`;
+      message += `\n\nMensaje adicional:\n${additionalMessage.trim()}`;
     }
 
-    message += `\n\n¡Nos vemos en la aventura safari! 🦒🐵`;
+    message += `\n\nGracias por confirmar. ¡Te esperamos!`;
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;

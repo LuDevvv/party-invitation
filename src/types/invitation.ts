@@ -12,18 +12,9 @@ export interface Event {
   address: string;
 }
 
-export interface Venue {
-  photos: string[];
-}
-
 export interface Story {
   title: string;
   content: string;
-}
-
-export interface Media {
-  video: string;
-  audio: string;
 }
 
 export interface RSVPData {
@@ -35,9 +26,7 @@ export interface RSVPData {
 export interface InvitationData {
   child: Child;
   event: Event;
-  venue: Venue;
   story: Story;
-  media: Media;
 }
 
 export interface WhatsAppMessage {
