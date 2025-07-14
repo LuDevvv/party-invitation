@@ -94,7 +94,7 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ isOpen, onClose }) => {
 
       setTimeout(() => {
         onClose();
-      }, 2000);
+      }, 6000);
     } catch (error) {
       console.error("Error sending confirmation:", error);
     } finally {
@@ -189,7 +189,7 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ isOpen, onClose }) => {
                 <div className="flex items-center justify-end">
                   <button
                     onClick={onClose}
-                    className="text-white hover:text-yellow-200 transition-colors p-3 hover:bg-white/10 rounded-full"
+                    className="text-white hover:text-yellow-200 transition-colors p-2 mr-3 hover:bg-white/10 rounded-full"
                     disabled={isSubmitting}
                   >
                     <X size={32} strokeWidth={3} />
@@ -198,13 +198,13 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ isOpen, onClose }) => {
               </div>
 
               {/* Form Content - espaciado profesional mejorado */}
-              <div className="p-10 md:p-16">
-                <form onSubmit={handleSubmit} className="space-y-12">
+              <div className="p-2 md:p-8 lg:p-12">
+                <form onSubmit={handleSubmit} className="space-y-4">
                   {/* Guest Name */}
                   <div>
-                    <label className="block text-xl font-bold text-amber-900 mb-6">
-                      <div className="flex items-center gap-3 mb-2">
-                        <span>Nombre del invitado principal</span>
+                    <label className="block text-xl font-bold text-amber-900">
+                      <div className="text-sm flex items-center gap-1 mb-1">
+                        <span>Nombre</span>
                         <span className="text-red-500">*</span>
                       </div>
                     </label>
@@ -231,13 +231,13 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ isOpen, onClose }) => {
 
                   {/* Guest Count */}
                   <div>
-                    <label className="block text-xl font-bold text-amber-900 mb-6">
-                      <div className="flex items-center gap-3 mb-2">
+                    <label className="block text-xl font-bold text-amber-900">
+                      <div className="text-sm flex items-center gap-1 mb-1">
                         <span>Total de asistentes (incluyéndote)</span>
                       </div>
                     </label>
-                    <div className="safari-counter p-10">
-                      <div className="flex items-center justify-center gap-12">
+                    <div className="safari-counter">
+                      <div className="flex items-center justify-center gap-1">
                         <button
                           type="button"
                           onClick={decrementGuests}
@@ -248,10 +248,10 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ isOpen, onClose }) => {
                         </button>
 
                         <div className="text-center min-w-[140px]">
-                          <div className="text-6xl font-bold text-amber-900 mb-3">
+                          <div className="text-5xl font-bold text-amber-900">
                             {formData.guestCount}
                           </div>
-                          <p className="text-lg text-amber-700 font-semibold">
+                          <p className="text-md text-amber-700 font-semibold">
                             {formData.guestCount === 1
                               ? "Solo tú"
                               : `${formData.guestCount} personas`}
@@ -279,11 +279,11 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ isOpen, onClose }) => {
                   </div>
 
                   {/* Submit Button */}
-                  <div className="text-center pt-8">
+                  <div className="text-center">
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className={`btn-safari w-full py-8 px-12 text-2xl flex items-center justify-center gap-6 ${
+                      className={`btn-safari w-full py-4 text-1xl flex items-center justify-center gap-4 ${
                         isSubmitting ? "opacity-50 cursor-not-allowed" : ""
                       }`}
                     >

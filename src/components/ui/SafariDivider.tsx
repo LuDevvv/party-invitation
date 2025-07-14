@@ -15,7 +15,7 @@ export const SafariDivider: React.FC<SafariDividerProps> = ({
 }) => {
   return (
     <section
-      className={`w-full h-32 md:h-40 lg:h-48 relative mb-8 overflow-hidden ${className}`}
+      className={`mt-2 w-full h-32 md:h-40 lg:h-48 relative mb-8 overflow-hidden ${className}`}
     >
       <Image
         src={SAFARI_DIVIDER_IMAGE.src}

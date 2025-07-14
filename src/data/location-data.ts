@@ -1,35 +1,11 @@
 export interface LocationData {
-  propertyName: string;
-  address1: string;
-  address2: string;
   googleMapsUrl: string;
-  mapEmbedUrl: string;
-  buildingImage: string;
   youtubeUrl?: string;
 }
 
 export const LOCATION_DATA: LocationData = {
-  propertyName: "Lugar de la Fiesta",
-  address1: "Rua Camudos 402",
-  address2: "La Romana, República Dominicana",
   googleMapsUrl:
-    "https://www.google.com/maps/place/18%C2%B027'00.7%22N+69%C2%B019'24.0%22W/@18.4506609,-69.3237455,17.61z/data=!4m4!3m3!8m2!3d18.4501944!4d-69.3233333?entry=ttu&g_ep=EgoyMDI1MDUyMS4wIKXMDSoASAFQAw%3D%3D",
-  mapEmbedUrl:
-    "https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d2486.5216227206597!2d-69.32374545219207!3d18.45066089388451!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTjCsDI3JzAwLjciTiA2OcKwMTknMjQuMCJX!5e0!3m2!1sen!2sdo!4v1748022438996!5m2!1sen!2sdo",
-  buildingImage:
-    "https://res.cloudinary.com/dcuapqoii/image/upload/w_600,q_70,f_auto,c_fill/v1748404986/1_xwydtj.png",
+    "https://www.google.com/maps/place/18%C2%B024'01.6%22N+69%C2%B005'09.3%22W/@18.4004421,-69.0884895,17z/data=!3m1!4b1!4m4!3m3!8m2!3d18.4004421!4d-69.0859146?hl=en&entry=ttu&g_ep=EgoyMDI1MDcwOS4wIKXMDSoASAFQAw%3D%3D",
   youtubeUrl:
     "https://www.youtube.com/results?search_query=como+llegar+a+la+romana+republica+dominicana",
 };
-
-export const LOCATION_CONFIG = {
-  mapHeight: {
-    mobile: "400px",
-    desktop: "600px",
-  },
-  cardWidth: "420px",
-  imageHeight: {
-    mobile: "200px",
-    desktop: "160px",
-  },
-} as const;

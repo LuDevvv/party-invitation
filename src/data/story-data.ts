@@ -15,11 +15,11 @@ export const STORY_IMAGES: StoryImage[] = [
     alt: "Momento especial 1",
   },
   {
-    src: "https://res.cloudinary.com/dcuapqoii/image/upload/v1752270346/WhatsApp_Image_2025-07-11_at_15.53.22_orzl9h.jpg",
+    src: "https://res.cloudinary.com/dcuapqoii/image/upload/v1752465650/WhatsApp_Image_2025-07-13_at_23.47.22_pxgxki.jpg",
     alt: "Momento especial 2",
   },
   {
-    src: "https://res.cloudinary.com/dcuapqoii/image/upload/v1752270346/WhatsApp_Image_2025-07-11_at_15.53.22_orzl9h.jpg",
+    src: "https://res.cloudinary.com/dcuapqoii/image/upload/v1752465650/WhatsApp_Image_2025-07-13_at_23.45.55_cjm6kh.jpg",
     alt: "Momento especial 3",
   },
 ];
@@ -47,7 +47,16 @@ export const STORY_TITLE_IMAGE = {
   alt: "Historia",
 };
 
-// Configuraciones
+export const LOCATION_TITLE_IMAGE = {
+  src: "https://res.cloudinary.com/dcuapqoii/image/upload/v1752465636/Artboard_6_copy_4_lrmpli.png",
+  alt: "Ubicación",
+};
+
+export const ATTENDANCE_TITLE_IMAGE = {
+  src: "https://res.cloudinary.com/dcuapqoii/image/upload/v1752465636/Artboard_6_copy_3_iaekk0.png",
+  alt: "Asistencia",
+};
+
 export const STORY_CONFIG = {
   autoRotateInterval: 4000, // 4 segundos
   polaroidAnimationDuration: 500,

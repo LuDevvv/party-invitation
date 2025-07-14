@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { RSVPModal } from "@/components/rsvp/RSVPModal";
+import { ATTENDANCE_TITLE_IMAGE } from "@/data/story-data";
 
 export const RSVPSection: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,32 +15,38 @@ export const RSVPSection: React.FC = () => {
     <>
       <section
         id="rsvp"
-        className="relative min-h-screen flex items-center justify-center py-16 px-4 overflow-hidden"
-        style={{
-          background:
-            "linear-gradient(135deg, #f0f9f0 0%, #fff7ed 50%, #f0f9f0 100%)",
-        }}
+        className="relative min-h-screen flex items-center justify-center py-10 px-8 overflow-hidden"
       >
         {/* Container principal centrado */}
         <div className="w-full max-w-6xl mx-auto relative z-10">
           <div className="flex flex-col items-center justify-center text-center space-y-12">
-            {/* Título principal con marco */}
-            <div className="animate-fade-in-up">
-              <div className="relative inline-block">
-                <Image
-                  src="https://res.cloudinary.com/dcuapqoii/image/upload/v1752269500/Artboard_7_zhh9g5.png"
-                  alt="Marco confirmación"
-                  width={700}
-                  height={400}
-                  className="w-[400px] md:w-[500px] lg:w-[600px] h-auto drop-shadow-2xl"
-                  priority
-                />
-                <div className="absolute inset-0 flex items-center justify-center px-4">
-                  <h2 className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-yellow-800 leading-tight text-center">
-                    ¡Confirma tu
-                    <br />
-                    Asistencia!
-                  </h2>
+            {/* Título como imagen optimizada con marco */}
+            <div className="flex flex-col items-center justify-center text-center mb-6">
+              <div className="relative">
+                {/* MARCO del cartel título */}
+                <div className="relative w-64 md:w-80 lg:w-96 h-auto">
+                  <Image
+                    src="https://res.cloudinary.com/dcuapqoii/image/upload/v1752269500/Artboard_7_zhh9g5.png"
+                    alt="Marco cartel título historia"
+                    width={384}
+                    height={150}
+                    className="w-full h-auto drop-shadow-2xl"
+                    priority={false}
+                    sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"
+                  />
+
+                  {/* TEXTO "HISTORIA" superpuesto */}
+                  <div className="absolute top-15 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <Image
+                      src={ATTENDANCE_TITLE_IMAGE.src}
+                      alt={ATTENDANCE_TITLE_IMAGE.alt}
+                      width={300}
+                      height={60}
+                      className="w-64 h-auto"
+                      priority={false}
+                      sizes="(max-width: 768px) 192px, (max-width: 1024px) 240px, 288px"
+                    />
+                  </div>
                 </div>
               </div>
               <p className="text-lg md:text-xl lg:text-2xl text-gray-700 max-w-3xl mx-auto mt-6 leading-relaxed font-medium">
@@ -50,7 +57,7 @@ export const RSVPSection: React.FC = () => {
             {/* Cartel principal creativo */}
             <div className="animate-scale-in w-full max-w-6xl">
               <div
-                className="relative bg-gradient-to-br from-amber-100 via-orange-50 to-yellow-100 rounded-3xl shadow-2xl border-8 border-amber-800 p-8 md:p-12 lg:p-16 overflow-hidden"
+                className="relative bg-gradient-to-br from-amber-100 via-orange-50 to-yellow-100 rounded-3xl shadow-2xl border-8 border-amber-800 p-6 md:p-8 lg:p-12 overflow-hidden"
                 style={{
                   backgroundImage: `
                     radial-gradient(circle at 20% 30%, rgba(139, 69, 19, 0.08) 0%, transparent 50%),
@@ -78,42 +85,13 @@ export const RSVPSection: React.FC = () => {
                   <div className="absolute top-0.5 left-0.5 right-0.5 bottom-0.5 bg-amber-600 rounded-full"></div>
                 </div>
 
-                {/* Elementos decorativos adicionales */}
-                <div className="absolute top-1/4 left-4 w-16 h-16 opacity-10">
-                  <Image
-                    src="https://res.cloudinary.com/dcuapqoii/image/upload/v1752268494/Artboard_2_copy_2_emo0gd.png"
-                    alt=""
-                    width={64}
-                    height={64}
-                    className="w-full h-full object-contain animate-sway"
-                  />
-                </div>
-                <div className="absolute bottom-1/4 right-4 w-20 h-20 opacity-10">
-                  <Image
-                    src="https://res.cloudinary.com/dcuapqoii/image/upload/v1752268494/Artboard_1_ijjtv1.png"
-                    alt=""
-                    width={80}
-                    height={80}
-                    className="w-full h-full object-contain animate-float"
-                  />
-                </div>
-
-                {/* Cinta decorativa superior */}
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                  <div className="bg-gradient-to-r from-green-600 via-green-700 to-green-600 px-6 py-2 rounded-full shadow-lg border-4 border-green-800">
-                    <span className="text-white font-bold text-sm md:text-base tracking-wide">
-                      AVENTURA SAFARI
-                    </span>
-                  </div>
-                </div>
-
                 {/* Pregunta central con diseño creativo */}
                 <div className="text-center mb-12 mt-4">
                   <div className="relative">
                     {/* Fondo decorativo para el texto */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-100/50 to-transparent rounded-3xl transform -skew-y-1"></div>
 
-                    <h3 className="relative text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-amber-900 mb-6 py-6 px-4">
+                    <h3 className="relative text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-amber-900 mb-2 py-6">
                       <span className="block mb-3">
                         <span className="inline-block animate-bounce mr-3 text-3xl md:text-4xl lg:text-5xl">
                           🦁
@@ -158,9 +136,7 @@ export const RSVPSection: React.FC = () => {
                       className="relative bg-gradient-to-br from-green-600 via-green-700 to-green-800 hover:from-green-700 hover:via-green-800 hover:to-green-900 text-white font-bold text-xl md:text-2xl lg:text-3xl px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 border-4 border-green-800 hover:border-green-900"
                     >
                       <span className="flex items-center gap-3">
-                        <span className="text-2xl md:text-3xl">📱</span>
-                        ¡SÍ, VOY!
-                        <span className="text-2xl md:text-3xl">🦒</span>
+                        ¡CONFIRMAR!
                       </span>
 
                       {/* Efecto brillante */}

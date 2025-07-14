@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface SafariLayoutProps {
   children: React.ReactNode;
@@ -27,25 +28,31 @@ const SafariLayout = ({ children }: SafariLayoutProps) => {
     <div className="relative min-h-screen">
       {/* Liana Izquierda - OVERLAY fija */}
       <div className="fixed left-[-55px] top-0 h-full w-24 md:w-32 lg:w-40 z-50 pointer-events-none">
-        <img
+        <Image
           src="https://res.cloudinary.com/dcuapqoii/image/upload/v1752268494/Artboard_2_copy_2_emo0gd.png"
           alt="Liana izquierda"
-          className="w-full h-full object-cover object-right opacity-90"
+          fill
+          className="object-cover object-right opacity-90"
+          priority
+          sizes="(max-width: 768px) 96px, (max-width: 1024px) 128px, 160px"
         />
       </div>
 
       {/* Liana Derecha - OVERLAY fija */}
       <div className="fixed right-[-80px] top-0 h-full w-24 md:w-32 lg:w-40 z-50 pointer-events-none">
-        <img
+        <Image
           src="https://res.cloudinary.com/dcuapqoii/image/upload/v1752268494/Artboard_2_copy_fqjwku.png"
           alt="Liana derecha"
-          className="w-full h-full object-cover object-left opacity-90"
+          fill
+          className="object-cover object-left opacity-90"
+          priority
+          sizes="(max-width: 768px) 96px, (max-width: 1024px) 128px, 160px"
         />
       </div>
 
-      {/* Follaje Superior - OVERLAY que se oculta con scroll */}
+      {/* Follaje Superior Principal - OVERLAY que se oculta con scroll */}
       <div
-        className={`fixed top-0 left-0 right-0 h-30 md:h-20 lg:h-24 z-40 pointer-events-none transition-all duration-500 ease-out ${
+        className={`fixed -top-4 left-0 right-1/2 h-32 md:h-40 lg:h-48 z-40 pointer-events-none transition-all duration-500 ease-out ${
           isScrolled
             ? "opacity-0 transform -translate-y-full"
             : "opacity-80 transform translate-y-0"
@@ -54,10 +61,56 @@ const SafariLayout = ({ children }: SafariLayoutProps) => {
           transform: `translateY(${isScrolled ? "-100%" : scrollY * -0.5}px)`,
         }}
       >
-        <img
+        <Image
           src="https://res.cloudinary.com/dcuapqoii/image/upload/v1752268494/Artboard_1_ijjtv1.png"
-          alt="Follaje superior"
-          className="w-full h-full object-cover object-bottom"
+          alt="Follaje superior izquierdo"
+          fill
+          className="object-cover object-top scale-110"
+          priority
+          sizes="50vw"
+        />
+      </div>
+
+      {/* Follaje Superior Secundario - OVERLAY que se oculta con scroll */}
+      <div
+        className={`fixed -top-4 right-0 left-1/2 h-32 md:h-40 lg:h-48 z-40 pointer-events-none transition-all duration-500 ease-out ${
+          isScrolled
+            ? "opacity-0 transform -translate-y-full"
+            : "opacity-75 transform translate-y-0"
+        }`}
+        style={{
+          transform: `translateY(${
+            isScrolled ? "-100%" : scrollY * -0.4
+          }px) scaleX(-1)`,
+        }}
+      >
+        <Image
+          src="https://res.cloudinary.com/dcuapqoii/image/upload/v1752268494/Artboard_1_ijjtv1.png"
+          alt="Follaje superior derecho"
+          fill
+          className="object-cover object-top scale-110"
+          priority
+          sizes="50vw"
+        />
+      </div>
+
+      {/* Follaje Superior Central - Capa adicional para mayor densidad */}
+      <div
+        className={`fixed -top-5 left-1/4 right-1/4 h-28 md:h-36 lg:h-44 z-39 pointer-events-none transition-all duration-700 ease-out ${
+          isScrolled
+            ? "opacity-0 transform -translate-y-full"
+            : "opacity-60 transform translate-y-0"
+        }`}
+        style={{
+          transform: `translateY(${isScrolled ? "-100%" : scrollY * -0.3}px)`,
+        }}
+      >
+        <Image
+          src="https://res.cloudinary.com/dcuapqoii/image/upload/v1752268494/Artboard_1_ijjtv1.png"
+          alt="Follaje superior central"
+          fill
+          className="object-cover object-top opacity-70 scale-105"
+          sizes="50vw"
         />
       </div>
 

@@ -1,228 +1,213 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
-import { ExternalLink, MapPin, Play, Navigation } from "lucide-react";
+import { ExternalLink, Play, Navigation, Pause } from "lucide-react";
 import { LOCATION_DATA } from "@/data/location-data";
+import { LOCATION_TITLE_IMAGE } from "@/data/story-data";
+
+// Custom Safari-themed Video Player Component
+const CloudinaryVideoPlayer: React.FC<{
+  src: string;
+  poster: string;
+  title: string;
+}> = ({ src, poster, title }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [showControls, setShowControls] = useState(true);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const handleVideoClick = () => {
+    togglePlay();
+    setShowControls(true);
+    setTimeout(() => setShowControls(false), 3000);
+  };
+
+  return (
+    <div
+      className="relative w-full h-full group cursor-pointer"
+      onClick={handleVideoClick}
+    >
+      <video
+        ref={videoRef}
+        src={src}
+        poster={poster}
+        className="w-full h-full object-cover rounded-2xl"
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+        onMouseEnter={() => setShowControls(true)}
+        onMouseLeave={() => setTimeout(() => setShowControls(false), 2000)}
+      />
+
+      {/* Safari-themed overlay gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-amber-900/40 via-transparent to-green-900/20 rounded-2xl pointer-events-none" />
+
+      {/* Safari-themed Controls */}
+      <div
+        className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
+          showControls || !isPlaying ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        {/* Safari-styled Play/Pause Button */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            togglePlay();
+          }}
+          className="w-20 h-20 bg-gradient-to-br from-amber-600 to-amber-700 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:from-amber-700 hover:to-amber-800 transition-all duration-300 transform hover:scale-110 shadow-2xl border-4 border-amber-200/30"
+        >
+          {isPlaying ? (
+            <Pause size={32} className="drop-shadow-lg" />
+          ) : (
+            <Play size={32} className="ml-1 drop-shadow-lg" />
+          )}
+        </button>
+      </div>
+
+      {/* Safari-themed Video Title with wood background */}
+      <div className="absolute bottom-4 left-4 right-4">
+        <div className="bg-gradient-to-r from-amber-800/90 to-amber-700/90 backdrop-blur-sm rounded-xl px-4 py-1 border-2 border-amber-200/30">
+          <h4 className="text-white font-bold text-lg drop-shadow-lg flex items-center gap-1">
+            {title}
+          </h4>
+        </div>
+      </div>
+
+      {/* Safari corner decorations when not playing */}
+      {!isPlaying && (
+        <>
+          <div className="absolute top-4 left-4 w-3 h-3 bg-amber-600 rounded-full opacity-60">
+            <div className="absolute top-0.5 left-0.5 right-0.5 bottom-0.5 bg-amber-400 rounded-full"></div>
+          </div>
+          <div className="absolute top-4 right-4 w-3 h-3 bg-amber-600 rounded-full opacity-60">
+            <div className="absolute top-0.5 left-0.5 right-0.5 bottom-0.5 bg-amber-400 rounded-full"></div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
 
 export const LocationSection: React.FC = () => {
   return (
     <section
       id="location"
-      className="relative py-16 md:py-24 overflow-hidden flex justify-center"
-      style={{
-        background:
-          "linear-gradient(135deg, #f0f9f0 0%, #fff7ed 50%, #f0f9f0 100%)",
-      }}
+      className="relative py-10 px-4 md:py-24 overflow-hidden"
     >
-      <div className="container mx-auto px-4 max-w-7xl relative z-10">
-        {/* Título principal con marco temático */}
-        <div className="text-center mb-16">
-          <div className="relative inline-block">
-            <Image
-              src="https://res.cloudinary.com/dcuapqoii/image/upload/v1752269500/Artboard_7_zhh9g5.png"
-              alt="Marco ubicación"
-              width={450}
-              height={180}
-              className="w-[350px] md:w-[450px] h-auto drop-shadow-xl"
-              priority
-            />
-            <div className="absolute inset-0 flex items-center justify-center px-4">
-              <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-yellow-800 leading-tight text-center">
-                📍 Ubicación
-              </h2>
+      <div className="container mx-auto max-w-6xl relative z-10">
+        {/* Título como imagen optimizada con marco */}
+        <div className="flex flex-col items-center justify-center text-center mb-12">
+          <div className="relative">
+            {/* MARCO del cartel título */}
+            <div className="relative w-64 md:w-80 lg:w-96 h-auto">
+              <Image
+                src="https://res.cloudinary.com/dcuapqoii/image/upload/v1752269500/Artboard_7_zhh9g5.png"
+                alt="Marco cartel título lugar"
+                width={384}
+                height={150}
+                className="w-full h-auto drop-shadow-2xl"
+                priority={false}
+                sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"
+              />
+
+              {/* TEXTO "LUGAR" superpuesto */}
+              <div className="absolute top-15 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <Image
+                  src={LOCATION_TITLE_IMAGE.src}
+                  alt={LOCATION_TITLE_IMAGE.alt}
+                  width={300}
+                  height={60}
+                  className="w-48 md:w-60 lg:w-72 h-auto"
+                  priority={false}
+                  sizes="(max-width: 768px) 192px, (max-width: 1024px) 240px, 288px"
+                />
+              </div>
             </div>
           </div>
-          <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mt-6 leading-relaxed font-medium">
-            Encuentra el lugar perfecto para nuestra aventura safari
-          </p>
         </div>
 
-        {/* Mobile card mejorada */}
-        <div className="md:hidden mb-8">
-          <div
-            className="bg-white shadow-2xl rounded-3xl overflow-hidden border-6 border-amber-700 relative"
-            style={{
-              backgroundImage: `
-                radial-gradient(circle at 25% 25%, rgba(139, 69, 19, 0.06) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(160, 82, 45, 0.06) 0%, transparent 50%)
-              `,
-            }}
-          >
-            {/* Decoraciones de esquinas */}
-            <div className="absolute top-3 left-3 w-3 h-3 bg-amber-800 rounded-full opacity-30">
-              <div className="absolute top-0.5 left-0.5 right-0.5 bottom-0.5 bg-amber-600 rounded-full"></div>
-            </div>
-            <div className="absolute top-3 right-3 w-3 h-3 bg-amber-800 rounded-full opacity-30">
-              <div className="absolute top-0.5 left-0.5 right-0.5 bottom-0.5 bg-amber-600 rounded-full"></div>
-            </div>
-
-            <div className="p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
-                  <MapPin className="text-white" size={20} />
-                </div>
-                <h3 className="text-xl font-bold text-amber-900">
-                  {LOCATION_DATA.propertyName}
-                </h3>
+        {/* Cards Container */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Video Card */}
+          <div className="safari-card p-6">
+            {/* Video Header */}
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center shadow-lg">
+                <Play className="text-white" size={24} />
               </div>
+              <div>
+                <h3 className="text-2xl font-bold text-amber-900">
+                  Tour Virtual
+                </h3>
+                <p className="text-amber-700">Conoce nuestro lugar mágico</p>
+              </div>
+            </div>
 
-              <div className="flex gap-3">
+            {/* Video Player */}
+            <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden shadow-xl bg-gray-900">
+              <CloudinaryVideoPlayer
+                src="https://res.cloudinary.com/dcuapqoii/video/upload/v1752269050/Villa_lirvr7.mp4"
+                poster="https://res.cloudinary.com/dcuapqoii/image/upload/v1752472708/Screenshot_2025-07-14_015751_yr031y.png"
+                title="Villa - Tour Virtual"
+              />
+            </div>
+          </div>
+
+          {/* Directions Card */}
+          <div className="safari-card p-6">
+            {/* Directions Header */}
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                <Navigation className="text-white" size={24} />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-amber-900">
+                  Cómo Llegar
+                </h3>
+                <p className="text-amber-700">
+                  Encuentra tu camino a la aventura
+                </p>
+              </div>
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="space-y-4">
+              <a
+                href={LOCATION_DATA.googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-3 border-blue-800"
+              >
+                <ExternalLink size={20} className="mr-3" />
+                Abrir en Google Maps
+              </a>
+
+              {LOCATION_DATA.youtubeUrl && (
                 <a
-                  href={LOCATION_DATA.googleMapsUrl}
+                  href={LOCATION_DATA.youtubeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-3 rounded-xl font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                  className="w-full flex items-center justify-center bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-3 border-red-800"
                 >
-                  <ExternalLink size={16} className="mr-2" />
-                  Google Maps
+                  <Play size={20} className="mr-3" />
+                  Ver Direcciones en Video
                 </a>
-
-                {LOCATION_DATA.youtubeUrl && (
-                  <a
-                    href={LOCATION_DATA.youtubeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-4 py-3 rounded-xl font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                  >
-                    <Play size={16} className="mr-2" />
-                    Video Tour
-                  </a>
-                )}
-              </div>
+              )}
             </div>
-
-            <div className="relative h-48 w-full">
-              <Image
-                src={LOCATION_DATA.buildingImage}
-                alt={LOCATION_DATA.propertyName}
-                fill
-                sizes="(max-width: 768px) 100vw, 400px"
-                className="object-cover"
-              />
-              {/* Overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-            </div>
-          </div>
-        </div>
-
-        {/* Map container mejorado */}
-        <div className="relative w-full h-[400px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl border-6 border-amber-700">
-          {/* Embedded Google Map */}
-          <iframe
-            src={LOCATION_DATA.mapEmbedUrl}
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="rounded-2xl"
-            title={`${LOCATION_DATA.propertyName} Location`}
-          />
-
-          {/* Desktop info card overlay mejorada */}
-          <div className="hidden md:block absolute top-8 left-8 w-[400px] z-10">
-            <div
-              className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 rounded-3xl shadow-2xl overflow-hidden border-6 border-amber-700 relative backdrop-blur-sm"
-              style={{
-                backgroundImage: `
-                  radial-gradient(circle at 25% 25%, rgba(139, 69, 19, 0.06) 0%, transparent 50%),
-                  radial-gradient(circle at 75% 75%, rgba(160, 82, 45, 0.06) 0%, transparent 50%)
-                `,
-              }}
-            >
-              {/* Decoraciones de esquinas */}
-              <div className="absolute top-4 left-4 w-4 h-4 bg-amber-800 rounded-full opacity-30">
-                <div className="absolute top-0.5 left-0.5 right-0.5 bottom-0.5 bg-amber-600 rounded-full"></div>
-              </div>
-              <div className="absolute top-4 right-4 w-4 h-4 bg-amber-800 rounded-full opacity-30">
-                <div className="absolute top-0.5 left-0.5 right-0.5 bottom-0.5 bg-amber-600 rounded-full"></div>
-              </div>
-
-              {/* Cinta decorativa */}
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <div className="bg-gradient-to-r from-green-600 via-green-700 to-green-600 px-4 py-1.5 rounded-full shadow-lg border-3 border-green-800">
-                  <span className="text-white font-bold text-sm tracking-wide">
-                    LUGAR DEL EVENTO
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-6 pt-8">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center shadow-lg">
-                    <MapPin className="text-white" size={24} />
-                  </div>
-                  <h3 className="text-2xl font-bold text-amber-900">
-                    {LOCATION_DATA.propertyName}
-                  </h3>
-                </div>
-
-                <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 mb-5 border-2 border-amber-200 shadow-sm">
-                  <div className="flex items-start">
-                    <Navigation
-                      className="text-green-600 mr-3 flex-shrink-0 mt-1"
-                      size={20}
-                    />
-                    <div>
-                      <p className="font-bold text-gray-900 text-lg">
-                        {LOCATION_DATA.address1}
-                      </p>
-                      <p className="text-gray-600">{LOCATION_DATA.address2}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <a
-                    href={LOCATION_DATA.googleMapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-3 rounded-xl font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-2 border-blue-800"
-                  >
-                    <ExternalLink size={16} className="mr-2" />
-                    Maps
-                  </a>
-
-                  {LOCATION_DATA.youtubeUrl && (
-                    <a
-                      href={LOCATION_DATA.youtubeUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-4 py-3 rounded-xl font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-2 border-red-800"
-                    >
-                      <Play size={16} className="mr-2" />
-                      Video
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              <div className="relative h-32 w-full">
-                <Image
-                  src={LOCATION_DATA.buildingImage}
-                  alt={LOCATION_DATA.propertyName}
-                  fill
-                  className="object-cover"
-                  sizes="400px"
-                />
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-              </div>
-            </div>
-          </div>
-
-          {/* Floating action button para móvil */}
-          <div className="md:hidden absolute bottom-6 right-6">
-            <a
-              href={LOCATION_DATA.googleMapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-14 h-14 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-full flex items-center justify-center shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110 border-3 border-blue-800"
-            >
-              <Navigation size={24} />
-            </a>
           </div>
         </div>
       </div>
