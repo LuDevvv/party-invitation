@@ -87,7 +87,6 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ isOpen, onClose }) => {
       sendMessage(
         formData.guestName,
         formData.guestCount,
-        formData.additionalMessage
       );
 
       setShowSuccess(true);
